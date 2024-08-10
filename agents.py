@@ -1,14 +1,18 @@
 from crewai import Agent
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langchain.agents import load_tools
 import os
-from langchain_openai import OpenAI
 
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_MODEL_NAME = os.getenv("OPENAI_MODEL_NAME")
 
-openai = OpenAI(api_key=OPENAI_API_KEY, model=OPENAI_MODEL_NAME)
+openai = ChatOpenAI(api_key=OPENAI_API_KEY, model=OPENAI_MODEL_NAME)
+
+#Defining human tools to be used in the email creator agent for feedback
+human_tools = load_tools(["human"])
 
 class YoutubeAutomationAgents():
     def youtube_manager(self):
@@ -29,7 +33,7 @@ class YoutubeAutomationAgents():
             verbose=True,
         )
     
-    def research_manager(self):
+    def research_manager(self, youtube_video_search_tool, youtube_video_details_tool):
         #This manager is going go off and research on our YouTube videos
         return Agent(
             role="YouTube Research Manager",
