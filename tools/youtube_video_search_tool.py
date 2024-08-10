@@ -4,6 +4,11 @@ from typing import Type, List
 from datetime import datetime, timezone
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 
 #Basically we are creating a tool that will search for youtube videos based on a keyword and return a list of video search results
 #What we expect to get from the tool is a list of video search results
@@ -27,7 +32,7 @@ class YoutubeVideoSearchTool(BaseTool):
     #Whenever we are creating a tool we have to define a _run file that will be executed when the tool is run
 
     def _run(self, keyword: str, max_results: int = 10) -> List[VideoSearchResult]:
-        api_key = os.getenv("YOUTUBE_API_KEY")
+        api_key = YOUTUBE_API_KEY
         url = "https://www.googleapis.com/youtube/v3/search"
         params = {
             "part": "snippet",

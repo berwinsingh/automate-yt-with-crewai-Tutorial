@@ -1,7 +1,7 @@
 from crewai import Agent
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from langchain.agents import load_tools
+from langchain_community.agent_toolkits.load_tools import load_tools
 import os
 
 load_dotenv()
@@ -11,8 +11,6 @@ OPENAI_MODEL_NAME = os.getenv("OPENAI_MODEL_NAME")
 
 openai = ChatOpenAI(api_key=OPENAI_API_KEY, model=OPENAI_MODEL_NAME)
 
-#Defining human tools to be used in the email creator agent for feedback
-human_tools = load_tools(["human"])
 
 class YoutubeAutomationAgents():
     def youtube_manager(self):
@@ -81,6 +79,5 @@ class YoutubeAutomationAgents():
                 Do NOT ask the human to create the email for you.
                 """,
             verbose=True,
-            tools=human_tools, #This tool adds a human in between which ensures that until the email is approved it isn't sent.
             llm = openai,
         )

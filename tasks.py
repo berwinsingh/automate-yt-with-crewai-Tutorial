@@ -197,6 +197,7 @@ class YoutubeAutomationTasks():
                 Important Notes:
                 - Make sure to copy my style, tone, and voice when writing the email.
                 - Create a draft email. Once you have created a draft email, you MUST have a human review your tenative final email.
+                - This is just a sample example for your reference do not give me the same thing as response.
 
                 Email 1:
                 ----------------
@@ -271,5 +272,6 @@ class YoutubeAutomationTasks():
             agent=agent,
             expected_output=dedent(f"""
                 An email that contains a subject and body that is formatted exactly like the example email provided to you earlier.
-            """)
+            """),
+            human_input=True
         )
